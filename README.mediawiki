@@ -1,1 +1,23 @@
- 
+== PlayBingo ==
+This contains my prototype for evaluating the play framework version 1.2.4.
+It is not for productional use and no best practice example.
+
+It is a bingo game with a chat.
+
+== Highlights ==
+* tests for a registration flow (registration, email confirmation, login, logout, forgot password with captcha)
+* tests for Java Script running with play autotest
+* graceful websockets
+* tests works with localized version
+* tests for AJAX
+
+== Things that could be better ==
+* the play provided password hashes are not safe: https://groups.google.com/d/topic/play-framework/9KIUwWBjudQ/discussion
+* Cross-Site Request Forgery: http://www.playframework.org/documentation/1.2/security
+* the websockets version of the current Chrome browser does not work with play 1.2.4 anymore, so you must run it with play 1.2.5
+* chat does not use websockets, but the bingo game does
+* jackson is better for generating json than gson
+* there are better libs available than graceful websockets
+
+== Licence ==
+This is distributed under [http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 licence].
