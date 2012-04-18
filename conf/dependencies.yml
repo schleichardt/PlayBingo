@@ -1,0 +1,5 @@
+require:
+    - play
+    - play -> secure
+    - play -> cobertura 2.3
+    - play -> qunit 1.0

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+#{javascripts/footIncludes /}
+#{qunit.include /}
+    <script>
+        $(document).ready(function () {
+            test("calculateHumanReadableDateDiff", function () {
+                expect(16);
+
+                var output1 = calculateHumanReadableDateDiff(1000);
+                equal(output1["seconds"], 1, "seconds matches");
+                equal(output1["minutes"], 0, "minutes matches");
+                equal(output1["hours"], 0, "hours matches");
+                equal(output1["days"], 0, "days matches");
+
+                var output2 = calculateHumanReadableDateDiff(60000);
+                equal(output2["seconds"], 0, "seconds matches");
+                equal(output2["minutes"], 1, "minutes matches");
+                equal(output2["hours"], 0, "hours matches");
+                equal(output2["days"], 0, "days matches");
+
+                var output3 = calculateHumanReadableDateDiff(3600000);
+                equal(output3["seconds"], 0, "seconds matches");
+                equal(output3["minutes"], 0, "minutes matches");
+                equal(output3["hours"], 1, "hours matches");
+                equal(output3["days"], 0, "days matches");
+
+
+                var output3 = calculateHumanReadableDateDiff(5 * 1000 + 4 * 1000 * 60 + 3 * 1000 * 60 * 60 + 2 * 24 * 1000 * 60 * 60);
+                equal(output3["seconds"], 5, "seconds matches");
+                equal(output3["minutes"], 4, "minutes matches");
+                equal(output3["hours"], 3, "hours matches");
+                equal(output3["days"], 2, "days matches");
+            });
+
+            test("calcTimeNextDrawing", function () {
+                expect(6);
+                var gameInfo = new Object();
+                gameInfo.firstDrawing = "Dec 11, 2011 9:42:00 PM";
+                gameInfo.drawingIntervalInSeconds = 20;
+                var now = new Date("Dec 11, 2011 9:41:26 PM");
+                var result1 = calcTimeNextDrawing(gameInfo, now);
+                equal(result1.getMinutes(), 42, "minutes matches");
+                equal(result1.getSeconds(), 0, "seconds matches");
+                equal(result1.getHours(), 21, "hours matches");//9 PM = 2100
+
+
+                now = new Date("Dec 11, 2011 9:44:05 PM");
+                var result1 = calcTimeNextDrawing(gameInfo, now);
+                equal(result1.getMinutes(), 44, "minutes matches");
+                equal(result1.getSeconds(), 20, "seconds matches");
+                equal(result1.getHours(), 21, "hours matches");//9 PM = 21:00
+            });
+
+            test("announceNumbersOnTable", function () {
+                expect(2);
+                var data = [2, 4];
+                announceNumbersOnTable(data);
+                var expectedClass = "ui-selected";
+                ok($("#announced_number_2,#announced_number_4").hasClass(expectedClass), "marker set");
+                ok(!$("#announced_number_1,#announced_number_3,#announced_number_5").hasClass(expectedClass), "marker not set");
+
+            });
+
+            test("announceCurrentNumber", function () {
+                expect(2);
+                equal($('#lastAnnouncedNumber').text(), 'no');
+                var announcedNumbersArray = [63, 65, 78, 12];
+                announceCurrentNumber("#lastAnnouncedNumber", announcedNumbersArray);
+                equal($('#lastAnnouncedNumber').text(), '12');
+            });
+
+            test('showError', function () {
+                expect(1);
+                var message = 'abcdefghijklamnop';
+                var selector = '*:contains(' + message + ')';
+                var countBeforeFunction = $(selector).size();
+                showError(message)
+                ok(countBeforeFunction < $(selector).size());
+            });
+
+            test('showSuccess', function () {
+                expect(1);
+                var message = 'abcdefghijklamnop';
+                var selector = '*:contains(' + message + ')';
+                var countBeforeFunction = $(selector).size();
+                showSuccess(message)
+                ok(countBeforeFunction < $(selector).size());
+            });
+        });
+    </script>
+</head>
+<body>
+<span id="announced_number_1">1</span>
+<span id="announced_number_2">2</span>
+<span id="announced_number_3">3</span>
+<span id="announced_number_4">4</span>
+<span id="announced_number_5">5</span>
+
+<span id="lastAnnouncedNumber">no</span>
+
+<div id="flashMessages"></div>
+
+<h1 id="qunit-header">QUnit example</h1>
+
+<h2 id="qunit-banner"></h2>
+
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>

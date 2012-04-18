@@ -1,0 +1,5 @@
+#{selenium}
+open('/@qunit?select=all&auto=yes')
+waitForElementNotPresent('css=body.running')
+assertElementNotPresent('css=.failed')
+#{/selenium}

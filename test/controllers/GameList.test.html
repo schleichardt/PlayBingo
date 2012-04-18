@@ -1,0 +1,23 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+%{gameId = testutils.BingoSeleniumTestUtil.prepareTest();}%
+#{selenium}
+setTimeout(2000)
+clearSession()
+assertElementNotPresent('css=#gameListLink')
+open('/')
+    #{Selenium/login /}
+echo('open game list page')
+clickAndWait('css=#gameListLink')
+
+assertTitle('&{'bingo.listGames'}')
+echo('assert two example games are present')
+assertTextPresent('${testutils.BingoSeleniumTestUtil.GAME_TITLE}')
+assertTextPresent('${testutils.BingoSeleniumTestUtil.GAME_TITLE_2}')
+
+echo('visit first game')
+clickAndWait('xpath=//a[text()="${testutils.BingoSeleniumTestUtil.GAME_TITLE}"]')
+
+echo('assert is game page')
+assertTextPresent('${testutils.BingoSeleniumTestUtil.GAME_TITLE}')
+
+#{/selenium}

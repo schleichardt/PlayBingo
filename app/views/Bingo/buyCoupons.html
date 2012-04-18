@@ -1,0 +1,7 @@
+#{extends 'main.html' /}
+#{set title:messages.get("Buy.coupons") /}
+<div class="span16">
+    <h2>&{'Confirmation'}</h2>
+
+    <p>${count.pluralize(messages.get('Buy.coupons.confirmationSingular'),messages.get('Buy.coupons.confirmationPlural', count))}</p>
+</div>

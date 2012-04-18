@@ -1,0 +1,68 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+#{selenium}
+clearSession()
+open('/')
+    #{Selenium/login /}
+
+#Test required validation
+open('@{Bingo.openGameForm()}')
+type('css=#game_drawingIntervalInSeconds', '')
+clickAndWait('css=#submit')
+assertValue('css=#game_initialWaitingTimeInSeconds', 0)
+assertElementPresent('css=#error_game_drawingIntervalInSeconds')
+assertElementPresent('css=#error_game_title')
+
+%{
+initialWaitingTimeInSeconds = 10;
+drawingIntervalInSeconds = 3;
+}%
+
+type('css=#game_initialWaitingTimeInSeconds', '${initialWaitingTimeInSeconds}')
+type('css=#game_drawingIntervalInSeconds', '${drawingIntervalInSeconds}')
+%{title ='Hello Game';}%
+type('css=#game_title', '${title}')
+clickAndWait('css=#submit')
+
+assertElementNotPresent('css=#error_game_initialWaitingTimeInSeconds')
+assertElementNotPresent('css=#error_game_drawingIntervalInSeconds')
+assertElementNotPresent('css=#error_game_title')
+assertText('css=#gameStart', '&{'bingo.OpenGame.clickToStart', title}')
+
+clickAndWait('css=#gameStart')
+
+//simplification: there is a global clock
+waitForText('css=#timeToNextDrawing_seconds', '05')
+setTimeout(200)
+pause(900)
+waitForText('css=#timeToNextDrawing_seconds', '04')
+pause(900)
+waitForText('css=#timeToNextDrawing_seconds', '03')
+pause(900)
+waitForText('css=#timeToNextDrawing_seconds', '02')
+setTimeout(30000)
+%{
+xpathForCoupons= "//div[@id=\"bingo_coupons\"]//table[contains(@class,\"bingo coupon\")]";
+xpathFirstNumberOnFirstCoupon = xpathForCoupons + "//tr[1]/td[1]/a";
+xpathMyMarkedElement = xpathForCoupons + "/tbody/tr[1]/td[@class=\"ui-selected\"][1]";
+}%
+assertXpathCount('${xpathForCoupons}',0)
+click('css=#getCoupon')
+waitForXpathCount('${xpathForCoupons}',1)
+click('css=#getCoupon')
+waitForXpathCount('${xpathForCoupons}',2)
+click('css=#getCoupon')
+waitForXpathCount('${xpathForCoupons}',3)
+assertTextNotPresent('&{'bingo.game.noMoreCouponsLeft'}')
+click('css=#getCoupon')
+waitForTextPresent('&{'bingo.game.noMoreCouponsLeft'}')
+assertXpathCount('${xpathForCoupons}',3)
+
+assertElementNotPresent('xpath=${xpathMyMarkedElement}')
+click('xpath=${xpathFirstNumberOnFirstCoupon}')
+assertElementPresent('xpath=${xpathMyMarkedElement}')
+
+storeLocation(locationVar)
+open(#{verbatim }&#36;{locationVar}#{/verbatim})
+assertElementPresent('xpath=${xpathMyMarkedElement}')
+
+#{/selenium}

@@ -1,0 +1,8 @@
+#do not open an url in this template
+type(css=#username, 'Michael')
+type(css=#password, 'Play1Rules.')
+clickAndWait(css=#signin)
+
+assertTextNotPresent('&{'secure.error'}')
+assertTextPresent(&{'logout.user', 'Michael'})
+#preserve empty line at file end

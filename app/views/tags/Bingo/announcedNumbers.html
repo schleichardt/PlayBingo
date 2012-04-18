@@ -1,0 +1,35 @@
+<table id="bingo_announcedNumbers" class="bingo announcedNumbers">
+    <caption>&{'bingo.announcedNumbers'}</caption>
+    %{
+	final int lastNumber = 75;
+	final int numbersPerRow = 5;
+	final int column = 0;
+	
+	def announcedNumbers = _game == null ? new ArrayList<Integer>(0) : _game.getDrawings();
+	
+	for (int i = 1; i <= lastNumber; i++) {
+		if (column == 0) {
+			}%
+    <tr>%{
+		}
+		
+		boolean isAnnounced = announcedNumbers.indexOf(i) >= 0;
+		if (isAnnounced) {
+			}%
+    <td id="announced_number_${i}" class="ui-selected">${i}</td>
+    %{
+		} else {
+			}%
+    <td id="announced_number_${i}">${i}</td>%{
+		}
+		
+		
+		if (column >= numbersPerRow - 1) {
+			column = -1;
+			}%</tr>%{
+		}
+		column++;
+	}
+
+}%
+</table>

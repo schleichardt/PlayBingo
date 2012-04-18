@@ -1,0 +1,31 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+<div class="span16">
+    <h2>Play Bingo</h2>
+
+    <p>Play Bingo ist ein Prototyp für die Evaluierung des Play Frameworks.
+        Es wird nur virtuell um Geld gespielt und der Prototyp ist nicht für den produktiven Einsatz bestimmt.</p>
+
+    <p>Die Texte, die durch die Präsentation führen, sind nur auf Deutsch verfügbar.</p>
+
+    <p>Zum Fortfahren können Sie:</p>
+#{if session.username }
+    <ol type="a">
+        <li>sich <a href="@{Secure.logout()}" id="logout">ausloggen</a></li>
+        <li><a href="@{Bingo.buyCouponsForm()}">&{'Buy.coupons'}</a></li>
+        <li>ein <a href="@{Bingo.openGame()}">&{'bingo.OpenGame'}</a></li>
+        <li>die <a href="@{Bingo.listGames()}" id="gameListLink">&{'bingo.listGames'}</a> anzeigen</li>
+    </ol>
+#{/if}
+#{else}
+    <ol type="a">
+        <li>sich #{a @Registration.register()}registrieren#{/a}</li>
+        <li>sich einloggen (Formular oben rechts)</li>
+        <li>Ihr #{a @PasswordForgotten.forgotPasswordForm()}Passwort anfordern#{/a}, sofern Sie sich schon registriert
+            haben.
+        </li>
+    </ol>
+#{/else}
+</div>

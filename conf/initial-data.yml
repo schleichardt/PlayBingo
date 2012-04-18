@@ -1,0 +1,14 @@
+User(michael):
+    username: Michael
+    password: Play1Rules.
+    email: "michael@schleichardt.net"
+    unusedCoupons: 3
+    emailConfirmed: true
+
+User(user2):
+    username: usertwo
+    password: Play1Rules.
+    email: "michael@schleichardt.net"
+    unusedCoupons: 0
+    emailConfirmed: true
+

@@ -1,0 +1,13 @@
+#{extends 'main.html' /}
+#{if success}
+#{set 'title'}&{'Registration.email.confirmed'}#{/set}
+<div class="alert-message success">
+    <p>&{'Registration.email.confirmed'}</p>
+</div>
+#{/if}
+#{else}
+#{set 'title'}&{'Registration.email.confirmation.error'}#{/set}
+<div class="alert-message error">
+    <p>&{'Registration.email.confirmation.error'}</p>
+</div>
+#{/else}

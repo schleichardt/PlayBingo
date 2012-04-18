@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set 'title'}&{'Registration.createUser.title'}#{/set}
+
+<div class="span1">
+    &nbsp;
+</div>
+<div class="span14">
+    <p>&{'Registration.createUser.success', user.username}</p>
+#{if emailSuccessfullySend}
+    <p>&{'Registration.email.pleaseCheckYourMails'}</p>
+#{/if}
+#{else}
+    <p>&{'Registration.email.pleaseCheckYourMailsLater'}</p>
+#{/else}
+
+#{if play.Play.mode.isDev()}
+    <h4>Versandte E-Mail</h4>
+    <pre>${emailText}</pre>
+    <p>Kopieren Sie bitte den langen Link in die Adresszeile Ihres Browsers und rufen die Seite auf.</p>
+#{/if}
+</div>
+<div class="span1">
+    &nbsp;
+</div>

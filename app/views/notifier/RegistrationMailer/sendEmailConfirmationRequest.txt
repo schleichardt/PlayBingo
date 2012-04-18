@@ -1,0 +1,4 @@
+#{set 'url'}@@{Application.index}#{/set}
+&{'Registration.email.pleaseClickFollowingLink', url}
+
+URL: @@{Registration.confirmEmail(user.getSecret(), user.getId())}

@@ -1,0 +1,25 @@
+#{extends 'main.html' /}
+#{set 'title'}&{'Registration.createUser.title'}#{/set}
+<div class="row">
+    <div class="span1">
+        &nbsp;
+    </div>
+    <div class="span14">
+    #{form @Registration.register(), method:'post', id:'creationForm'}
+        <fieldset>
+            <legend>&{'Registration.createUser.title'}</legend>
+
+            #{form/input id:'user.username', label: messages.get('form.Username'), placeholder:messages.get('form.Username'), value:user?.username, errors:errors /}
+
+            #{form/input id:'user.password', label: messages.get('form.Password'), placeholder:messages.get('form.Password'), value:user?.password, type:'password', errors:errors /}
+        *{ a second password input field is not necessary, you can reset a password via email }*
+
+            #{form/input id:'user.email', label: messages.get('form.Email'), placeholder:messages.get('form.Email'), value:user?.email, errors:errors /}
+            #{form/submitReset submitValue:messages.get('Registration.createUser.submit.label') /}
+        </fieldset>
+    #{/form}
+        <div class="span1">
+            &nbsp;
+        </div>
+    </div>
+</div>

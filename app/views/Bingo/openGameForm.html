@@ -1,0 +1,9 @@
+#{extends 'main.html' /}
+#{set title:messages.get("bingo.OpenGame") /}
+
+#{form @Bingo.openGame(), method:'post'}
+    #{form/input id:'game.initialWaitingTimeInSeconds', label: messages.get('bingo.game.initialWaitingTimeInSeconds'), value:game?.initialWaitingTimeInSeconds ? game?.initialWaitingTimeInSeconds : play.Play.configuration.get("bingo.game.initialWaitingTimeInSeconds.default"), type:'number', min:0, errors:errors /}
+    #{form/input id:'game.drawingIntervalInSeconds', label: messages.get('bingo.game.drawingIntervalInSeconds'), value:game?.drawingIntervalInSeconds ? game?.drawingIntervalInSeconds : play.Play.configuration.get("bingo.game.drawingIntervalInSeconds.default"), type:'number', min:1, errors:errors /}
+    #{form/input id:'game.title', label: messages.get('bingo.game.title'), value:game?.title, errors:errors /}
+    #{form/submitReset /}
+#{/form}

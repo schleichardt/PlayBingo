@@ -1,0 +1,74 @@
+project.title = Play Bingo
+site.Home = Home
+site.RulesOfGame = Rules of game
+site.Register = Register
+chat = Chat
+bingo.coupon.label = Coupon %s
+bingo.announcedNumbers = Announced numbers
+bingo.winningPattern = pattern
+form.Username = Username
+form.Password = Password
+form.Email = Email
+form.SignIn =    Sign In
+form.Reset = Reset
+Registration.createUser.title = Create an account
+Registration.confirmRegistration.title = Your Account has been created
+RegistrationMailer.sendEmailConfirmationRequest.subject=Please confirm your email address.
+Registration.email.confirmed=Your email account has been approved. You now can login.
+Registration.email.confirmation.error = Your account is not in the system.
+Registration.email.pleaseClickFollowingLink = Please confirm your email address for %s by opening this website:
+Registration.email.pleaseCheckYourMails = Please confirm your email address by clicking at the link in the mail from us.
+Registration.email.pleaseCheckYourMailsLater=Please confirm your email address by clicking at the link in the mail from us.
+Registration.createUser.success = Account for %s created.
+
+password.check.missingLowerCase = A lower case character is missing.
+password.check.missingUpperCase = An upper case character is missing.
+password.check.missingNumber = A number is missing.
+password.check.missingPunctuationHtml = A punctuation is Missing (!"#$%%&'()*+,-./:;<=>?@[\\]^_`{|}~).
+
+validation.user.uniqueUsername = User already exists.
+
+secure.loginNecessary = Login necessary.
+secure.error = Oops, unknown username or password. Or you may have not yet confirmed your email.
+
+logout.user = Logout %s
+
+PasswordForgottenMailer.email.subject = Password Forgotten
+Password.forgotten = Password forgotten
+Password.forgotten.pleaseCheckYourMails = Please check your mails to reset your password.
+
+Submit = Submit
+
+PasswordWasSuccessfullyChanged = Password was successfully changed.
+
+validation.captchaDontMatches = Captcha code is wrong.
+
+ChangePassword = Change Password
+Password = Password
+NewPassword= New Password
+
+Buy.coupons = Buy Coupons
+Buy.coupons.confirmation = You have bought %d coupons.
+Buy.coupons.confirmationSingular = You have bought one coupon.
+Buy.coupons.confirmationPlural= You have bought %d coupons.
+Buy.coupons.count.label = Number of coupons
+
+bingo.OpenGame = Open a Bingo game
+bingo.OpenGame.clickToStart = Start the Bingo game "%s".
+bingo.game.initialWaitingTimeInSeconds = time in seconds until the game starts
+bingo.game.drawingIntervalInSeconds = time interval between two drawings
+bingo.game.title = Game Title
+bingo.game.RecentNumber = Recent number
+bingo.game.noNumberDrawn = none
+bingo.game.noMoreCouponsLeft = no more coupons left
+bingo.game.addCoupon = add a coupon
+bingo.game.YouHaveWon = You have won.
+bingo.game.YouHaveNotWon = You didn't won.
+bingo.game.NotFound = Game not found.
+bingo.listGames = Game List
+bingo.listGames.NoGamePresent = No game available.
+bingo.game.name = Bingo game %s
+
+chat.cantSendMessage = Can't send message.
+
+Confirmation = Confirmation

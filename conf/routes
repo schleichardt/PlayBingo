@@ -1,0 +1,51 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+*       /account/login                          Application.login
+*       /regeln                                 Application.rulesOfGame
+*       /account                                Account.index
+*       /register                               Registration.register
+*       /confirm/email                          Registration.confirmEmail
+GET     /forgotten/password                     PasswordForgotten.forgotPasswordForm
+POST    /forgotten/password                     PasswordForgotten.forgotPassword
+GET     /forgotten/password/change              PasswordForgotten.changePasswordForm
+POST    /forgotten/password/change              PasswordForgotten.changePassword
+
+POST    /bingo/buy/coupons                      Bingo.buyCoupons
+GET     /bingo/buy/coupons                      Bingo.buyCouponsForm
+POST    /bingo/open/game                        Bingo.openGame
+GET     /bingo/open/game                        Bingo.openGameForm
+
+GET     /bingo/start/game/{gameId}              Bingo.game
+
+WS      /bingo/drawingsForGame/{gameId}         Bingo.WebSocket.drawing
+*       /bingo/drawingsForGame/{gameId}         Bingo.WebSocketFallback.drawing
+
+GET     /bingo/add/coupon/to/game/{gameId}      Bingo.ajaxAddCoupon
+
+GET     /coupon/{marked}/{couponId}/{number}    Bingo.markCoupon
+
+*       /bingo/call/bingo                       Bingo.callBingo
+*       /bingo/list/games                       Bingo.listGames
+
+POST    /chat/post/message/                     Chat.postMessage
+GET     /chat/get/messages/{chatRoomId}         Chat.getMessages
+
+# Import Secure routes
+*      /                                        module:secure
+*      /captcha                                 Security.captcha
+
+
+
+
+

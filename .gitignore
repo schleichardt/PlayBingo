@@ -1,0 +1,45 @@
+# Ignore all dotfiles...
+.*
+# except for .gitignore
+!.gitignore
+
+# Ignore Play! working directory #
+db
+log
+logs
+precompiled
+tmp
+test-result
+eclipse
+server.pid
+out
+
+#Play existing modules
+modules/*
+localmodules/*/modules/*
+cobertura.ser
+
+#kde
+.directory
+
+# IDE and editors
+*~
+.idea
+nbproject
+eclipse
+.amateras
+.settings
+.classpath
+.project
+*.iml
+*.ipr
+*.iws
+target/
+
+#JVM
+*.class
+*.jar
+*.war
+
+#Python
+*.pyc

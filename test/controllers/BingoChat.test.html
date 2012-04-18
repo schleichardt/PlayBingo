@@ -1,0 +1,18 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+%{gameId = testutils.BingoSeleniumTestUtil.prepareTest();}%
+#{selenium}
+#setTimeout(3000)
+clearSession()
+open('/')
+    #{Selenium/login /}
+
+open('@{Bingo.game(gameId)}')
+waitForTextPresent('Bla 1')
+%{newTextFromUser = "New Text";}%
+assertTextNotPresent('${newTextFromUser}')
+type('css=#chatInputMessage', '${newTextFromUser}')
+click('css=#chatSendMessage')
+waitForTextPresent('${newTextFromUser}')
+
+
+#{/selenium}

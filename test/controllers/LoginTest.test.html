@@ -1,0 +1,34 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+#{selenium}
+
+#test if profile site is not accessable by anonymous users
+clearSession()
+open('@{Account.index()}')
+
+
+assertTitle('&{'secure.loginNecessary'}')
+
+#test with not existing user
+type(css=#username, 'dontExists')
+type(css=#password, 'password')
+clickAndWait(css=#signin)
+
+assertTextPresent('&{'secure.error'}')
+
+#test with existing user and wrong password
+type(css=#username, 'Michael')
+type(css=#password, 'EJB1.1RulesNot')
+clickAndWait(css=#signin)
+
+assertTextPresent('&{'secure.error'}')
+
+    #{Selenium/login /}
+
+clickAndWait('css=#logout')
+
+assertTextNotPresent(&{'logout.user', 'Michael'})
+
+open('@{Account.index()}')
+assertTitle(&{'secure.login'})
+
+#{/selenium}

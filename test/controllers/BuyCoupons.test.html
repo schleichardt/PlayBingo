@@ -1,0 +1,20 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+#{selenium}
+
+
+clearSession()
+open('@{Bingo.buyCouponsForm()}')
+
+assertTextPresent('&{'secure.loginNecessary'}')
+
+    #{Selenium/login /}
+
+%{numberOfCoupons = 3;}%
+
+type('css=#count', '${numberOfCoupons}')
+clickAndWait('css=#submit')
+
+assertTextPresent('&{'Buy.coupons.confirmation', numberOfCoupons}')
+
+
+#{/selenium}

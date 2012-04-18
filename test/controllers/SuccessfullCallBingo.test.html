@@ -1,0 +1,12 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+%{gameId = testutils.BingoSeleniumTestUtil.prepareTest();}%
+#{selenium}
+clearSession()
+open('/')
+    #{Selenium/login /}
+
+open('@{Bingo.game(gameId)}')
+assertTextNotPresent('&{'bingo.game.YouHaveWon'}')
+click('css=#callBingo')
+waitForTextPresent('&{'bingo.game.YouHaveWon'}')
+#{/selenium}

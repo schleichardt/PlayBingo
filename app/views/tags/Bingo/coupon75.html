@@ -1,0 +1,17 @@
+%{
+    elementsPerRow = 5;
+}%
+
+<table class="bingo coupon ui-selectable" id="coupon_${_coupon.id}">
+    <caption>Coupon</caption>
+<tr>
+#{list items:_coupon.numbers, as:'number'}
+    <td ${number.marked == true ? ' class=ui-selected' : ''} id="coupon_${_coupon.id}_value_${number.value}"><a
+            href="#">${number.value}</a></td>
+    #{if number_index == 12 }
+        <td class="ui-selected">&nbsp;</td>#{/if}
+    #{if (number_index == 5 || number_index == 10 || number_index == 14 || number_index == 19)}</tr>
+    <tr>#{/if}
+#{/list}
+</tr>
+</table>

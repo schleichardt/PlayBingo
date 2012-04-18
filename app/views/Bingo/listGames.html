@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title:messages.get("bingo.listGames") /}
+
+
+#{list items:gameList, as:'game'}
+${game_isFirst ? '<ul>'.raw() : ''}
+<li><a href="@{Bingo.game(game.id)}">${game.title}</a></li>
+${game_isLast ? '</ul>'.raw() : ''}
+#{/list}
+#{else}
+&{'bingo.listGames.NoGamePresent'}
+#{/else}

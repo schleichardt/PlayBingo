@@ -1,0 +1,9 @@
+%{
+    captchaId = play.libs.Codec.UUID();
+}%
+
+<div class="clearfix">
+    <img src="@{Security.captcha(captchaId)}"/>
+</div>
+#{form/input id:'captcha', label:_label, placeholder:'', value:'', errors:_errors, autocomplete:false /}
+<input type="hidden" id="captchaId" name="captchaId" value="${captchaId}"/>

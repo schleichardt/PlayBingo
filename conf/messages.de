@@ -1,0 +1,87 @@
+project.title = Play Bingo
+site.Home = Startseite
+site.RulesOfGame = Spielregeln
+site.Register = Registrieren
+chat = Chat
+bingo.coupon.label = Coupon %s
+bingo.announcedNumbers = Gezogene Nummern
+bingo.winningPattern = Gewinnmuster
+form.Email = E-Mail
+form.Username = Benutzername
+form.Password = Passwort
+form.SignIn = Einloggen
+form.Reset = Werte Zurücksetzen
+Registration.createUser.title = Registrierung
+Registration.createUser.submit.label = Absenden
+Registration.confirmRegistration.title = Ihr Account wurde angelegt
+RegistrationMailer.sendEmailConfirmationRequest.subject=Bitte bestätigen Sie Ihre E-Mail-Adresse.
+Registration.email.confirmed=Ihre E-Mail-Adresse wurde bestätigt. Sie können sich jetzt einloggen.
+Registration.email.confirmation.error = Ihre Daten konnten zu keinem Konto zugeordnet werden.
+Registration.email.pleaseClickFollowingLink = Um Ihre Registrierung auf %s abschließen zu können, müssen sie noch Ihre E-Mail-Adresse durch Aufruf folgenden Links bestätigen:
+Registration.email.pleaseCheckYourMails=Bitte bestätigen Sie Ihre E-Mail-Adresse, dazu wurde Ihnen eine Mail zugesandt.
+Registration.email.pleaseCheckYourMailsLater=Bitte bestätigen Sie Ihre E-Mail-Adresse, dazu wird Ihnen eine Mail zugesandt.
+Registration.createUser.success = Der Benutzer <em>%s</em> wurde registriert.
+
+password.check.missingLowerCase = Es fehlt ein Kleinbuchstabe.
+password.check.missingUpperCase = Es fehlt ein Großbuchstabe.
+password.check.missingNumber = Es fehlt eine Zahl.
+
+
+password.check.missingPunctuationHtml = Ein Sonderzeichen fehlt (!"#$%%&'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~).
+
+validation.user.uniqueUsername = Der Benutzer existiert schon.
+validation.required = Benötigt.
+validation.minSize = Die Mindestlänge beträgt %2$d.
+validation.maxSize = Die Maximallänge beträgt %2$d.
+validation.email = Ungültige E-Mail-Adresse.
+validation.unique = Es existiert schon ein Eintrag für diese %s in der Datenbank.
+validation.match = Muss aufgebaut sein wie %2$s.
+user.email = E-Mail-Adresse
+
+secure.loginNecessary = Login nötig.
+secure.error = Unbekannter Nutzer, Passwort falsch oder E-Mail-Adresse noch nicht bestätigt.
+
+logout.user = Logout %s
+
+PasswordForgottenMailer.email.subject = Passwort vergessen
+
+Password.forgotten = Passwort vergessen
+Password.forgotten.pleaseCheckYourMails = Bitte schauen Sie in Ihr E-Mail-Postfach, um das Passwort ändern zu können.
+
+Submit = Absenden
+
+PasswordWasSuccessfullyChanged = Passwort wurde erfolgreich geändert.
+
+validation.captchaDontMatches = Captcha-Code ist falsch.
+
+ChangePassword = Passwort ändern
+Password = Passwort
+NewPassword = Neues Passwort
+
+Buy.coupons = Coupons kaufen
+Buy.coupons.confirmation = Sie haben %d Coupons gekauft.
+Buy.coupons.confirmationSingular = Sie haben einen Coupon gekauft.
+Buy.coupons.confirmationPlural= Sie haben %d Coupons gekauft.
+Buy.coupons.count.label = Anzahl der Coupons
+
+validation.range = Nicht im Bereich von %2$d und %3$d.
+
+bingo.OpenGame = Bingo Spiel eröffnen
+bingo.OpenGame.clickToStart = Starte das Bingo-Spiel "%s".
+bingo.game.initialWaitingTimeInSeconds = Zeit in Sekunden, bis die erste Zahl gezogen wird
+bingo.game.drawingIntervalInSeconds = Zeit in Sekunden zwischen zwei Ziehungen
+bingo.game.title = Bingo Spiel Titel
+bingo.game.RecentNumber = Zuletzt gezogene Zahl
+bingo.game.noNumberDrawn = keine
+bingo.game.noMoreCouponsLeft = keine Coupons übrig
+bingo.game.addCoupon = Coupon hinzufügen
+bingo.game.YouHaveWon = Du hast gewonnen!
+bingo.game.YouHaveNotWon = Du hast nicht gewonnen!
+bingo.game.NotFound = Spiel nicht gefunden.
+bingo.listGames = Spielliste
+bingo.listGames.NoGamePresent = Kein Spiel vorhanden.
+bingo.game.name = Bingo-Spiel %s
+
+chat.cantSendMessage = Kann Nachricht nicht senden!
+
+Confirmation = Bestätigung

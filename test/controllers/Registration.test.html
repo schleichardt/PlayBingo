@@ -1,0 +1,52 @@
+#{fixture delete:'all', load:'initial-data.yml' /}
+#{selenium}
+open('@{Registration.register()}')
+assertElementPresent('css=input#user_username')
+assertElementPresent('css=input#user_password')
+assertElementPresent('css=input#user_email')
+
+### check validations for empty form ###
+clickAndWait(css=#submit)
+
+assertText(css=#error_user_username, '&{'validation.required'}')
+assertText(css=#error_user_password, '&{'validation.required'}')
+assertText(css=#error_user_email, '&{'validation.required'}')
+
+### check for invalid input ###
+#name too short
+type(css=#user_username, a)
+#password too short
+type(css=#user_password, b)
+type(css=#user_email, noEmail)
+clickAndWait(css=#submit)
+assertText(css=#error_user_username, '&{'validation.minSize', 'user.username', 2}')
+assertText(css=#error_user_password, '&{'validation.minSize', 'user.password', 9}')
+assertText(css=#error_user_email, '&{'validation.email'}')
+
+#test if current input is there
+assertAttribute('user_username@value', a)
+assertAttribute('user_password@value', b)
+assertAttribute('user_email@value', noEmail)
+
+
+type(css=#user_password, '123456789Ab')
+clickAndWait(css=#submit)
+assertTextPresent('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~')
+
+%{
+username = "TestUser";
+email = "noreply@localhost.local";
+}%
+type(css=#user_username, ${username})
+type(css=#user_password, '123456789Ab.')
+type(css=#user_email, '${email}')
+clickAndWait(css=#submit)
+
+assertElementNotPresent('css=.error')
+assertTextPresent('&{'Registration.createUser.success', username}')
+
+#test wrong data for email confirmation
+open('@{Registration.confirmEmail('nope', 1)}')
+assertTitle('&{'Registration.email.confirmation.error'}')
+
+#{/selenium}

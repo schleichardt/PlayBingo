@@ -1,0 +1,27 @@
+%{
+errors = _errors;
+hasErrors = errors?.forKey(_id);
+additionalClasses = hasErrors ? 'error' : '';
+if(!hasErrors && "POST".equals(request.method)) {
+additionalClasses = 'success ' + additionalClasses;
+}
+type = _type ? _type : 'text';
+autocomplete = _autocomplete == false ? 'autocomplete=off' : '';
+min = _min != null ? 'min=' + _min + '' : '';
+max = _max != null ? 'max=' + _max + '' : '';
+
+}%
+#{field _id}
+<div class="clearfix ${additionalClasses}">
+    <label for="${field.id}">${_label}</label>
+
+    <div class="input ${additionalClasses}">
+        <input class="${additionalClasses} xlarge" id="${field.id}" name="${field.name}"
+               size="30" type="${type}" placeholder="${_placeholder}" value="${_value}" ${autocomplete}
+        ${min} ${max}>
+
+            #{ifError _id}<span id="error_${field.id}" class="help-inline">#{error _id /}</span>#{/ifError}
+
+    </div>
+</div>
+#{/field}

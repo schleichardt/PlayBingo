@@ -1,0 +1,138 @@
+#{extends 'main.html' /}
+#{set title:messages.get("bingo.OpenGame") /}
+#{set 'footerScript'}
+    #{i18n /}
+<script type="text/javascript">
+    var gameInfo = ${gameInfoJson.raw()};
+
+    var jQuerySelectorForCountdown = '#timeToNextDrawing';
+
+    var finished = function () {
+        countDownTimer(jQuerySelectorForCountdown, calcTimeNextDrawing(gameInfo), finished);
+    }
+    finished();
+
+    var drawnNumbersWebSocket = $.gracefulWebSocket('@@{Bingo.WebSocket.drawing(gameInfo.getId())}');
+    drawnNumbersWebSocket.onmessage = function (event) {
+        var announcedNumbersArray = $.parseJSON(event.data);
+        announceNumbersOnTable(announcedNumbersArray);
+        announceCurrentNumber("#lastAnnouncedNumber", announcedNumbersArray);
+    };
+
+
+    $('#getCoupon').click(function () {
+        $.getJSON('@@{Bingo.ajaxAddCoupon(gameInfo.id)}', function (data) {
+            if (data.errorMessage) {
+                showError(data.errorMessage);
+            } else {
+                $('#bingo_coupons').append(data.couponHtml);
+            }
+        });
+    });
+
+    $('#bingo_coupons td a').live('click', function (event) {
+        event.preventDefault();
+        var parent = $(this).parent();
+        parent.toggleClass('ui-selected');
+        var id = parent.attr('id');//should be like coupon_21_value_3
+        var dataArray = id.split('_');
+        var couponId = dataArray[1];
+        var number = dataArray[3];
+        var marked = parent.hasClass('ui-selected');
+        var action = #{jsAction @Bingo.markCoupon(':marked', ':couponId', ':number') /}
+                $.get(action({marked:marked, couponId:couponId, number:number}));
+    });
+
+
+    $('#callBingo').live('click', function (event) {
+        var action = #{jsAction @Bingo.callBingo(':gameId') /}
+        var url = action({gameId:gameInfo.id});
+
+        $.getJSON(url, function (data) {
+            if (data.hasWon) {
+                showSuccess(i18n(data.messageKey));
+            } else if (data.messageKey) {
+                showError(i18n(data.messageKey));
+            }
+        });
+
+
+    });
+
+    var getMessages = function () {
+        $.getJSON('@@{Chat.getMessages(gameInfo.chatRoomId)}', function (data) {
+            var messagesElement = $('#chat .messages');
+            jQuery.each(data, function (i, val) {
+                var elementId = 'chatMessage' + i;
+                var condition = $('#' + elementId).length;
+                if (condition <= 0) {
+                    messagesElement.append('<article id=' + elementId + ' class="well">' + val.author + ': ' + val.messageText + '</article>');
+                }
+            });
+        });
+    }
+
+    getMessages();
+
+    var chatLoadMessagesJob = setInterval(getMessages, 500);
+
+
+    $('#chatSendMessage').click(function (event) {
+        event.preventDefault();
+        var post = $.post('@@{Chat.postMessage()}', {'chatRoomId':gameInfo.chatRoomId, 'messageText':$('#chatInputMessage').val()});
+        post.error(function () {
+            showError(i18n('chat.cantSendMessage'));
+        })
+    });
+
+
+</script>
+#{/set}
+
+<div class="span11">
+    <h2>&{'bingo.game.name', gameInfo.title}</h2>
+
+    <div class="row">
+        <div class="span3">#{Bingo/announcedNumbers game:gameInfo/}</div>
+        <div class="span8">
+            <section id="gameinfos" class="row">
+                <div class="span3">#{Bingo/winningPattern /}</div>
+                <div class="span5"><p><span id="timeToNextDrawing_minutes">??</span>:<span
+                        id="timeToNextDrawing_seconds">??</span> bis zur nächsten Ziehung</p>
+
+                    <p>&{'bingo.game.RecentNumber'}: <span
+                            id="lastAnnouncedNumber">${gameInfo.drawings.size() > 0 ? (gameInfo.drawings.get(gameInfo.drawings.size() - 1)) : messages.get('bingo.game.noNumberDrawn')}</span>
+                    </p>
+
+                    <p>Jackpot: 25000 €</p>
+
+                    <p>3 Spieler</p></div>
+
+                <button class="btn" id="getCoupon">&{'bingo.game.addCoupon'}</button>
+            </section>
+
+            <div class="bingo coupons" id="bingo_coupons">
+            #{list items:coupons, as:'coupon'}
+                    #{Bingo/coupon75 coupon:coupon /}
+                #{/list}
+
+            </div>
+            <button id="callBingo" class="btn success span8">Bingo</button>
+        </div>
+    </div>
+</div>
+<div class="span5">
+    <h2>&{'chat'}</h2>
+    <small>3 Leute online</small>
+
+    <div id="chat" class="">
+        <div class="messages">
+        </div>
+
+        <form id="chat_message_form">
+            <input class="span5" id="chatInputMessage" name="" type="text"
+                   placeholder="Hier die Chat-Nachricht eingeben">
+            <button id="chatSendMessage" type="submit" class="btn">Senden</button>
+        </form>
+    </div>
+</div>

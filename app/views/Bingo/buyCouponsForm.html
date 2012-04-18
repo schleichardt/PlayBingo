@@ -1,0 +1,9 @@
+#{extends 'main.html' /}
+#{set title:messages.get("Buy.coupons") /}
+
+%{count = count ? count : '1';}%
+
+#{form @Bingo.buyCoupons(), method:'post'}
+    #{form/input id:'count', label: messages.get('Buy.coupons.count.label'), placeholder:messages.get('Buy.coupons.count.label'), value:count, type:'number', min:controllers.Bingo.MIN_COUPONS, max:controllers.Bingo.MAX_COUPONS, errors:errors /}
+    #{form/submitReset /}
+#{/form}

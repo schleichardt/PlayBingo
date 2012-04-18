@@ -1,0 +1,5 @@
+#{extends 'main.html' /}
+#{set title:messages.get("bingo.OpenGame") /}
+<div class="span16">
+    <a href="@{Bingo.game(game?.id)}" id="gameStart">&{'bingo.OpenGame.clickToStart', game?.title}</a>
+</div>
