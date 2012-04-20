@@ -9,7 +9,6 @@ It is a bingo game with a chat.
 * tests for Java Script running with play autotest
 * graceful websockets
 * tests works with localized version
-* tests for AJAX
 
 == Things that could be better ==
 * the play provided password hashes are not safe: https://groups.google.com/d/topic/play-framework/9KIUwWBjudQ/discussion
